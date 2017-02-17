@@ -1,4 +1,4 @@
-# Roll A Ball Project
+# Space Shooter Project
 
 __What is Space Shooter__
 
