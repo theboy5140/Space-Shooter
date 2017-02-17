@@ -11,6 +11,8 @@ OS : Windows 10 Enterprie Edition 64 Bit
 
 Engine : Unity 5.5.1f1 Personal 64 Bit 
 
+Assets : [https://www.assetstore.unity3d.com/en/#!/content/13866](https://www.assetstore.unity3d.com/en/#!/content/13866)
+
 __Where to see the video__
 
 [Unity3d office tutorial project video - Space Shooter](https://unity3d.com/learn/tutorials/projects/space-shooter/setting-up-the-project?playlist=17147)
