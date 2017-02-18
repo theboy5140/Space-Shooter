@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyByBoundary : MonoBehaviour {
+public class RandomRotator : MonoBehaviour {
+
+    public float tumble;
 
 	// Use this for initialization
 	void Start () {
@@ -13,9 +15,4 @@ public class DestroyByBoundary : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    void OnTriggerExit(Collider other){
-    
-        Destroy (other.gameObject);
-    }
 }
