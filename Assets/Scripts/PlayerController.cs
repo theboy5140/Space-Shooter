@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour {
    
     private Rigidbody rb;
    
-	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
 	}
@@ -27,7 +26,6 @@ public class PlayerController : MonoBehaviour {
         Instantiate (shot, transform.position, shotSpawn.rotation);
     }
 
-	// Update is called once per frame
 	void FixedUpdate () {
         
         float moveHorizontal = Input.GetAxis ("Horizontal");
