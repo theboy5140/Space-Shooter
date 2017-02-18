@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public float tilt;
     public Boundary boundary;
-
+    public GameObject shot;
+    public Transform shotSpawn;
+   
     private Rigidbody rb;
    
 	// Use this for initialization
@@ -21,6 +23,10 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 	}
 	
+    void Update(){
+        Instantiate (shot, transform.position +　new Vector3(0f, 0f, 10f), shotSpawn.rotation);
+    }
+
 	// Update is called once per frame
 	void FixedUpdate () {
         
