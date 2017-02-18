@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
     void Update(){
-        Instantiate (shot, transform.position +　new Vector3(0f, 0f, 10f), shotSpawn.rotation);
+        Instantiate (shot, transform.position, shotSpawn.rotation);
     }
 
 	// Update is called once per frame
