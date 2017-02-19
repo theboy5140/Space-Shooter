@@ -9,7 +9,7 @@ public class RandomRotator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        transform.position = new Vector3 (Mathf.Clamp(Random.value * 6, -6f, 6f), 0f, Mathf.Clamp(Random.value * 14, -14f, 14f));
+        //transform.position = new Vector3 (Mathf.Clamp(Random.value * 6, -6f, 6f), 0f, Mathf.Clamp(Random.value * 14, -14f, 14f));
 
         GetComponent<Rigidbody> ().angularVelocity = Random.insideUnitSphere * tumble;
 	}
@@ -18,4 +18,9 @@ public class RandomRotator : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void GetRandomPosition(){
+    
+        
+    }
 }
