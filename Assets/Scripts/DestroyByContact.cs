@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DestroyByContact : MonoBehaviour {
 
+    public GameObject explosion;
+    public GameObject playerExplosion;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -19,6 +22,12 @@ public class DestroyByContact : MonoBehaviour {
         if (other.tag == "Boundary" || other.tag == "Enemy")
         {
             return;
+        }
+        Instantiate (explosion, transform.position, transform.rotation);
+
+        if (other.tag == "Player") {
+            
+            Instantiate (playerExplosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
         }
         Destroy (other.gameObject);
         Destroy (gameObject);
