@@ -6,10 +6,17 @@ public class DestroyByContact : MonoBehaviour {
 
     public GameObject explosion;
     public GameObject playerExplosion;
+    public int scoreValue;
+    private GameController gameCongoller;
 
 	// Use this for initialization
 	void Start () {
-		
+        GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+        if (gameControllerObject != null) {
+            gameCongoller = gameControllerObject.GetComponent<GameController> ();
+        } else {
+            Debug.Log ("Cannot fild 'GameController' script ");
+        }
 	}
 	
 	// Update is called once per frame
@@ -23,12 +30,17 @@ public class DestroyByContact : MonoBehaviour {
         {
             return;
         }
+
         Instantiate (explosion, transform.position, transform.rotation);
 
         if (other.tag == "Player") {
             
             Instantiate (playerExplosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
+        
+            gameCongoller.GameOver ();
         }
+
+        gameCongoller.AddScore (scoreValue);
         Destroy (other.gameObject);
         Destroy (gameObject);
     }
