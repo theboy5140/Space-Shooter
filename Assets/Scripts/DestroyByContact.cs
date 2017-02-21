@@ -7,13 +7,13 @@ public class DestroyByContact : MonoBehaviour {
     public GameObject explosion;
     public GameObject playerExplosion;
     public int scoreValue;
-    private GameController gameCongoller;
+    private GameController gameController;
 
 	// Use this for initialization
 	void Start () {
         GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
         if (gameControllerObject != null) {
-            gameCongoller = gameControllerObject.GetComponent<GameController> ();
+            gameController = gameControllerObject.GetComponent<GameController> ();
         } else {
             Debug.Log ("Cannot fild 'GameController' script ");
         }
@@ -31,16 +31,17 @@ public class DestroyByContact : MonoBehaviour {
             return;
         }
 
-        Instantiate (explosion, transform.position, transform.rotation);
+        if (explosion != null) {
+            Instantiate (explosion, transform.position, transform.rotation);
+        }
 
         if (other.tag == "Player") {
             
             Instantiate (playerExplosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
         
-            gameCongoller.GameOver ();
+            gameController.GameOver ();
         }
-
-        gameCongoller.AddScore (scoreValue);
+        gameController.AddScore (scoreValue);
         Destroy (other.gameObject);
         Destroy (gameObject);
     }
