@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour {
 
     private float nextFire;
     private Rigidbody rb;
-   
+    private Quaternion  calibrationQuaternion;
+
 	void Start () {
 
         rb = GetComponent<Rigidbody>();
@@ -35,12 +36,28 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    void CalibrateAccelerometer(){
+    
+        Vector3 accelerometerCache = Input.acceleration;
+        Quaternion rotateQuaternion = Quaternion.FromToRotation (new Vector3(0.0f, 0.0f, -1.0f), accelerometerCache);
+        calibrationQuaternion = Quaternion.Inverse (rotateQuaternion);
+    }
+
+    Vector3 FixAcceleration(Vector3 acceleration){
+        Vector3 fixedAcceleration = calibrationQuaternion * acceleration;
+        return fixedAcceleration;
+    }
+
 	void FixedUpdate () {
 
-        float moveHorizontal = Input.GetAxis ("Horizontal");
-        float moveVertical = Input.GetAxis ("Vertical");
+       // float moveHorizontal = Input.GetAxis ("Horizontal");
+       // float moveVertical = Input.GetAxis ("Vertical");
 
-        Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+       // Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+
+        Vector3 acceleration = Input.acceleration;
+        Vector3 movement = new Vector3 (acceleration.x, 0.0f, acceleration.z);
+
         rb.velocity = movement * speed;
 
         rb.position = new Vector3 
