@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     private Quaternion  calibrationQuaternion;
 
 	void Start () {
+        CalibrateAccelerometer ();
 
         rb = GetComponent<Rigidbody>();
 	}
@@ -40,7 +41,9 @@ public class PlayerController : MonoBehaviour {
     
         Vector3 accelerometerCache = Input.acceleration;
         Quaternion rotateQuaternion = Quaternion.FromToRotation (new Vector3(0.0f, 0.0f, -1.0f), accelerometerCache);
+        Debug.Log (rotateQuaternion);
         calibrationQuaternion = Quaternion.Inverse (rotateQuaternion);
+        Debug.Log (calibrationQuaternion);
     }
 
     Vector3 FixAcceleration(Vector3 acceleration){
@@ -55,8 +58,9 @@ public class PlayerController : MonoBehaviour {
 
        // Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
-        Vector3 acceleration = Input.acceleration;
-        Vector3 movement = new Vector3 (acceleration.x, 0.0f, acceleration.z);
+        Vector3 accelerationRaw = Input.acceleration;
+        Vector3 acceleration = FixAcceleration (accelerationRaw);
+        Vector3 movement = new Vector3 (acceleration.x, 0.0f, acceleration.y);
 
         rb.velocity = movement * speed;
 
@@ -64,7 +68,7 @@ public class PlayerController : MonoBehaviour {
             (
                 Mathf.Clamp (rb.position.x, boundary.xMin, boundary.xMax), 
                 0.0f, 
-                Mathf.Clamp (rb.position.z, boundary.zMin, boundary.zMax)
+                Mathf.Clamp (rb.position.z, boundary.zMin, boundary.zMax)  
             );
         
         rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -tilt);
