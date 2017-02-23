@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     public Boundary boundary;
     public GameObject shot;
     public Transform shotSpawn;
+    public SimpleTouchPad simpleTouchPad;
 
     private float nextFire;
     private Rigidbody rb;
@@ -41,9 +42,7 @@ public class PlayerController : MonoBehaviour {
     
         Vector3 accelerometerCache = Input.acceleration;
         Quaternion rotateQuaternion = Quaternion.FromToRotation (new Vector3(0.0f, 0.0f, -1.0f), accelerometerCache);
-        Debug.Log (rotateQuaternion);
         calibrationQuaternion = Quaternion.Inverse (rotateQuaternion);
-        Debug.Log (calibrationQuaternion);
     }
 
     Vector3 FixAcceleration(Vector3 acceleration){
@@ -58,9 +57,10 @@ public class PlayerController : MonoBehaviour {
 
        // Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
-        Vector3 accelerationRaw = Input.acceleration;
-        Vector3 acceleration = FixAcceleration (accelerationRaw);
-        Vector3 movement = new Vector3 (acceleration.x, 0.0f, acceleration.y);
+       // Vector3 accelerationRaw = Input.acceleration;
+       // Vector3 acceleration = FixAcceleration (accelerationRaw);
+        Vector2 direction = simpleTouchPad.GetDirection();
+        Vector3 movement = new Vector3 (direction.x, 0.0f, direction.y);
 
         rb.velocity = movement * speed;
 
