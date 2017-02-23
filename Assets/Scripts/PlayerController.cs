@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject shot;
     public Transform shotSpawn;
     public SimpleTouchPad simpleTouchPad;
+    public SimpleTouchAreaButton areaButton;
 
     private float nextFire;
     private Rigidbody rb;
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour {
 	
     void Update(){
 
-        if (Input.GetButton("Fire1") && Time.time > nextFire) {
+        if (areaButton.CanFire() && Time.time > nextFire) {
             nextFire = Time.time + fireRate;
             Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
             GetComponent<AudioSource> ().Play ();
