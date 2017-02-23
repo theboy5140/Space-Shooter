@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SimpleTouchAreaButton : MonoBehaviour {
+public class SimpleTouchAreaButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 
     private bool touched;
     private int pointerID;
